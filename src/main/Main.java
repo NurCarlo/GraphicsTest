@@ -12,6 +12,9 @@ public class Main {
 		System.out.println("was zuum");
 		System.out.println("wie zuum");
 		System.out.println("wo zuum");
+		System.out.println("was zuum");
+		System.out.println("wie zuum");
+		System.out.println("wo zuum");
 
 
 	}
