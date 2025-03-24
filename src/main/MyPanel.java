@@ -8,33 +8,50 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class MyPanel extends JPanel implements ActionListener { // hier werden die grafiken gezeichent;
 
-	final int Panel_Breite = 700;
-	final int Panel_Hoehe = 700;
+	final int Panel_Breite =1000;
+	final int Panel_Hoehe = 1000;
 	Timer timer; // timer wird fuer den actionlistener benötigt;
 	int mills = 10;
-//	int xVel = 7;	->Ball
-//	int yVel = 11;
-//	int x = 10;
-//	int y = 200;
+
 	Ball ball[];
-	//int i,j;
+	int anzBalls = 10;
+	Random random = new Random();
+	
+	Item item;
 
 	MyPanel() {
 		this.setPreferredSize(new Dimension(Panel_Breite, Panel_Hoehe)); // Fenster richtet sich nach dieser Größe ohne
 																			// den oberen Rand
 		this.setBackground(Color.lightGray); // um den hintergrund auf diesse weise zu färebn muss "super.paint(g)"
 												// benutzt werden
-		ball = new Ball[10];
+		ball = new Ball[anzBalls];
 		
-		for(int i =0;i<ball.length;i+=1)
-			ball[i] = new Ball(i*50,i*50,i%2,(i%3)+5);
+		int xBalls,yBalls;
+		int xPosRand, yPosRand;
+		int xVelRand, yVelRand;
+		Color colorRand;
 		
+		for(int i =0;i<ball.length;i+=1) {
+			xBalls = (int) (i*Panel_Breite/ball.length);
+			xPosRand = random.nextInt(Panel_Breite) + 1;
+			yPosRand = random.nextInt(Panel_Hoehe) + 1;
+			xVelRand = random.nextInt(21) -10;
+			yVelRand = random.nextInt(21) -10;
+			colorRand = new Color(random.nextInt(256),random.nextInt(256),random.nextInt(256));
+			ball[i] = new Ball(xPosRand,yPosRand,xVelRand,yVelRand,colorRand);
+		}
+		
+
+		xPosRand = random.nextInt(Panel_Breite) + 1;
+		yPosRand = random.nextInt(Panel_Hoehe) + 1;
+		item = new Item(xPosRand, xPosRand, 0, 0, Color.black);
 //		for(int i =0;i<5;i+=1) {
 //			
 //			int x = i * (Panel_Hoehe - 10);
@@ -70,7 +87,7 @@ public class MyPanel extends JPanel implements ActionListener { // hier werden d
 //		y += yVel;
 		
 		for(int i =0;i<ball.length;i+=1)
-			ball[i].update(Panel_Breite, Panel_Hoehe);
+			ball[i].update(Panel_Breite, Panel_Hoehe, ball);
 		repaint();
 	}
 
@@ -90,6 +107,8 @@ public class MyPanel extends JPanel implements ActionListener { // hier werden d
 		
 		for(int i =0;i<ball.length;i+=1)
 			ball[i].draw(g2d);
+		
+		item.draw(g2d);
 
 		// text(g2d);
 		// dreieck(g2d);

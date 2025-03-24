@@ -24,14 +24,51 @@ public class Ball {
 		this.xVel = xVel;
 		this.yVel = yVel;
 	}
+	Ball(int x, int y, int xVel, int yVel,Color color){
+		this.x = x;
+		this.y = y;
+		this.xVel = xVel;
+		this.yVel = yVel;
+		this.color = color;
+	}
 	
-	public void update(int Panel_Breite,int Panel_Hoehe) {
-		if (x + 50 >= Panel_Breite || x < 0)
-			xVel *= -1;
-		if (y + 50 >= Panel_Hoehe || y < 0)
-			yVel *= -1;
+	public void update(int Panel_Breite,int Panel_Hoehe, Ball[] balls) {
+
+		this.checkWall(Panel_Breite, Panel_Hoehe);
+		
+		for (Ball other : balls) {
+			if (other != this){
+				this.checkBall(other);
+			}
+		}
+	
 		x += xVel;
 		y += yVel;
+	}
+	
+	public void checkWall(int Panel_Breite,int Panel_Hoehe) {
+		if (x + r >= Panel_Breite || x < 0)
+			xVel *= -1;
+		if (y + r >= Panel_Hoehe || y < 0)
+			yVel *= -1;
+	}
+	
+	public void checkBall(Ball other) {
+        double distance = Math.sqrt(Math.pow(other.x - this.x, 2) + Math.pow(other.y - this.y, 2));
+        
+        if (distance <= this.r) {
+            // Einfache Geschwindigkeitsvertauschung für elastische Kollision
+            int tempXVel = this.xVel;
+            int tempYVel = this.yVel;
+            this.xVel = other.xVel;
+            this.yVel = other.yVel;
+            other.xVel = tempXVel;
+            other.yVel = tempYVel;
+        }
+	}
+	
+	public void checkItem(Item item) {
+
 	}
 	
 	public void draw(Graphics2D g2d) {	//

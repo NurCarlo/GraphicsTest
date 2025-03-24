@@ -6,15 +6,12 @@ public class Main {
 
 	public static void main(String[] args) {
 		
+		int ah = (int) Math.random();
 		//fonts();
 		new MyFrame();
 		//new Tunk();
-		System.out.println("was zuum");
-		System.out.println("wie zuum");
-		System.out.println("wo zuum");
-		System.out.println("was zuum");
-		System.out.println("wie zuum");
-		System.out.println("wo zuum");
+		System.out.println("24.03.25");
+	
 
 
 	}
