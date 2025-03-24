@@ -11,6 +11,9 @@ public class Main {
 		new MyFrame();
 		//new Tunk();
 		System.out.println("24.03.25");
+		
+		//hey na wie gehts
+		System.out.println("24.03.25");
 	
 
 
