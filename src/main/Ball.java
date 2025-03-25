@@ -12,7 +12,9 @@ public class Ball {
 	int r = 50;
 	int xVel =7, yVel = 11;
 	Color color = Color.green;
-
+	
+	int hits = 0;
+	
 	Ball(int x, int y, Color color) {
 		this.x = x;
 		this.y = y;
@@ -32,7 +34,7 @@ public class Ball {
 		this.color = color;
 	}
 	
-	public void update(int Panel_Breite,int Panel_Hoehe, Ball[] balls) {
+	public void update(int Panel_Breite,int Panel_Hoehe, Ball[] balls,Item item) {
 
 		this.checkWall(Panel_Breite, Panel_Hoehe);
 		
@@ -41,6 +43,8 @@ public class Ball {
 				this.checkBall(other);
 			}
 		}
+		
+		this.checkItem(item);
 	
 		x += xVel;
 		y += yVel;
@@ -68,7 +72,14 @@ public class Ball {
 	}
 	
 	public void checkItem(Item item) {
-
+        double distance = Math.sqrt(Math.pow(item.x - this.x, 2) + Math.pow(item.y - this.y, 2));
+        
+        if (distance <= this.r) {
+        	xVel += 1;
+        	yVel += 1;
+        	hits ++;
+        	System.out.println("hits" + hits + "ball" );
+        }
 	}
 	
 	public void draw(Graphics2D g2d) {	//

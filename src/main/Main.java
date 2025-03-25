@@ -1,3 +1,4 @@
+
 package main;
 
 import java.awt.GraphicsEnvironment;
@@ -6,16 +7,9 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		int ah = (int) Math.random();
-		//fonts();
-		new MyFrame();
-		//new Tunk();
-		System.out.println("24.03.25");
+		//jo
 		
-		//hey na wie gehts
-		System.out.println("24.03.25");
-	
-
+		new MyFrame();
 
 	}
 

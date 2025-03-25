@@ -15,8 +15,8 @@ import javax.swing.Timer;
 
 public class MyPanel extends JPanel implements ActionListener { // hier werden die grafiken gezeichent;
 
-	final int Panel_Breite =1000;
-	final int Panel_Hoehe = 1000;
+	final int Panel_Breite =700;
+	final int Panel_Hoehe = 700;
 	Timer timer; // timer wird fuer den actionlistener benötigt;
 	int mills = 10;
 
@@ -42,16 +42,16 @@ public class MyPanel extends JPanel implements ActionListener { // hier werden d
 			xBalls = (int) (i*Panel_Breite/ball.length);
 			xPosRand = random.nextInt(Panel_Breite) + 1;
 			yPosRand = random.nextInt(Panel_Hoehe) + 1;
-			xVelRand = random.nextInt(21) -10;
-			yVelRand = random.nextInt(21) -10;
+			xVelRand = random.nextInt(5) -2;
+			yVelRand = random.nextInt(5) -2;
 			colorRand = new Color(random.nextInt(256),random.nextInt(256),random.nextInt(256));
-			ball[i] = new Ball(xPosRand,yPosRand,xVelRand,yVelRand,colorRand);
+			ball[i] = new Ball(xPosRand,yPosRand,yVelRand,xVelRand,colorRand);
 		}
 		
 
 		xPosRand = random.nextInt(Panel_Breite) + 1;
 		yPosRand = random.nextInt(Panel_Hoehe) + 1;
-		item = new Item(xPosRand, xPosRand, 0, 0, Color.black);
+		item = new Item(Panel_Hoehe/2, Panel_Breite/2, 0, 0, Color.black);
 //		for(int i =0;i<5;i+=1) {
 //			
 //			int x = i * (Panel_Hoehe - 10);
@@ -86,9 +86,14 @@ public class MyPanel extends JPanel implements ActionListener { // hier werden d
 //		x += xVel;
 //		y += yVel;
 		
-		for(int i =0;i<ball.length;i+=1)
-			ball[i].update(Panel_Breite, Panel_Hoehe, ball);
+		for(int i =0;i<ball.length;i+=1) {
+			ball[i].update(Panel_Breite, Panel_Hoehe, ball, item);
+			//item.update(ball[i]);
+		}
+		
 		repaint();
+		
+		
 	}
 
 	public void paint(Graphics g) { // das eigentliche zeichnen
@@ -114,7 +119,7 @@ public class MyPanel extends JPanel implements ActionListener { // hier werden d
 		// dreieck(g2d);
 		// zeug(g2d);
 		// pokeball(g2d);
-		System.out.println("paint");
+		//System.out.println("paint");
 
 	}
 
